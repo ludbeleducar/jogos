@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Química Periódica — Ludbel Educar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul:     #1B3A6B;
+    --azul-mid: #2A5298;
+    --cyan:     #00C2D4;
+    --amarelo:  #F5C400;
+    --laranja:  #F47B20;
+    --branco:   #FFFFFF;
+    --cinza-claro: #F4F6FB;
+    --cinza-texto: #444;
+    --radius: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--cinza-texto);
+    background: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ── UTILITÁRIOS ── */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .section   { padding: 72px 0; }
+  .section--gray { background: var(--cinza-claro); }
+  .section--dark { background: var(--azul); color: #fff; }
+  .section--darkmid { background: var(--azul-mid); color: #fff; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .tag--cyan   { background: var(--cyan);    color: var(--azul); }
+  .tag--yellow { background: var(--amarelo); color: var(--azul); }
+  .tag--orange { background: var(--laranja); color: #fff; }
+  .tag--white  { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+
+  h1,h2,h3,h4 { font-family: 'Bebas Neue', sans-serif; line-height: 1.1; letter-spacing: .03em; }
+
+  .btn {
+    display: inline-block;
+    background: var(--amarelo);
+    color: var(--azul);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    padding: 18px 40px;
+    border-radius: 999px;
+    text-decoration: none;
+    letter-spacing: .02em;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 6px 24px rgba(245,196,0,.45);
+    text-align: center;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(245,196,0,.55); }
+  .btn--full { display: block; width: 100%; }
+  .btn--orange { background: var(--laranja); color: #fff; box-shadow: 0 6px 24px rgba(244,123,32,.4); }
+  .btn--orange:hover { box-shadow: 0 10px 32px rgba(244,123,32,.55); }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  .hero {
+    background: linear-gradient(145deg, var(--azul) 0%, var(--azul-mid) 100%);
+    color: #fff;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .hero__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .hero__h1 {
+    font-size: clamp(40px, 7vw, 68px);
+    color: #fff;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 20px rgba(0,0,0,.2);
+  }
+  .hero__h1 span { color: var(--amarelo); }
+  .hero__sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.85);
+    max-width: 580px;
+    margin: 0 auto 36px;
+  }
+  .hero__sub strong { color: var(--cyan); }
+  .hero__badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .badge {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 999px;
+    padding: 7px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .badge span { color: var(--cyan); }
+
+  /* ── HERO IMAGE SLOT ── */
+  .hero__img-slot {
+    margin: 44px auto 0;
+    max-width: 640px;
+    background: rgba(255,255,255,.07);
+    border: 2px dashed rgba(255,255,255,.2);
+    border-radius: var(--radius);
+    padding: 48px 24px;
+    text-align: center;
+    color: rgba(255,255,255,.4);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .hero__img-slot svg { display: block; margin: 0 auto 12px; opacity: .3; }
+
+  /* ══════════════════════════════
+     PROBLEM
+  ══════════════════════════════ */
+  .problem__text {
+    font-size: 17px;
+    line-height: 1.85;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+  .problem__text p { margin-bottom: 20px; }
+  .problem__text .destaque {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--azul);
+    font-style: italic;
+    display: block;
+    margin: 28px 0;
+    text-align: center;
+  }
+  .problem__text .punch {
+    font-weight: 800;
+    color: var(--azul);
+  }
+
+  /* ══════════════════════════════
+     SOLUÇÃO
+  ══════════════════════════════ */
+  .solution__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  @media(max-width:560px){ .solution__grid { grid-template-columns: 1fr; } }
+  .solution__stat {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .solution__stat strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--amarelo);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .solution__stat span { font-size: 14px; color: rgba(255,255,255,.7); font-weight: 600; }
+
+  /* ── SOLUTION IMAGE SLOT ── */
+  .img-slot {
+    background: var(--cinza-claro);
+    border: 2px dashed #c8d3e8;
+    border-radius: var(--radius);
+    padding: 56px 24px;
+    text-align: center;
+    color: #a0aec0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin: 36px 0;
+  }
+  .img-slot--dark {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.18);
+    color: rgba(255,255,255,.35);
+  }
+  .img-slot svg { display: block; margin: 0 auto 10px; }
+
+  /* ══════════════════════════════
+     COMO FUNCIONA
+  ══════════════════════════════ */
+  .how__intro {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .how__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .how__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid #e2e8f4;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--azul);
+    box-shadow: 0 2px 8px rgba(27,58,107,.06);
+  }
+  .how__list li::before {
+    content: '⚗️';
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .how__punch {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--azul);
+    text-align: center;
+    padding: 28px;
+    background: linear-gradient(135deg, #EEF3FF 0%, #E0F7FA 100%);
+    border-radius: var(--radius);
+    border-left: 5px solid var(--cyan);
+  }
+
+  /* ══════════════════════════════
+     CIÊNCIA
+  ══════════════════════════════ */
+  .science__card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: var(--radius);
+    padding: 40px;
+    margin-top: 32px;
+  }
+  .science__card p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(255,255,255,.88);
+    margin-bottom: 20px;
+  }
+  .science__card p:last-child { margin-bottom: 0; }
+  .science__card strong { color: var(--cyan); }
+
+  /* ══════════════════════════════
+     BENEFÍCIOS
+  ══════════════════════════════ */
+  .benefits__tabs {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 0;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  @media(max-width:560px){ .benefits__tabs { grid-template-columns: 1fr; } }
+
+  .benefits__tab-btn {
+    padding: 16px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    cursor: default;
+    border: none;
+    letter-spacing: .02em;
+  }
+  .benefits__tab-btn--prof  { background: var(--azul);    color: #fff; }
+  .benefits__tab-btn--aluno { background: var(--cyan);    color: var(--azul); }
+  .benefits__tab-btn--pais  { background: var(--amarelo); color: var(--azul); }
+
+  .benefits__panel {
+    border: 2px solid #e2e8f4;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+  }
+  .benefits__group {
+    padding: 28px 32px;
+    border-bottom: 1px solid #e2e8f4;
+  }
+  .benefits__group:last-child { border-bottom: none; }
+  .benefits__group h4 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--azul-mid);
+    margin-bottom: 16px;
+  }
+  .benefits__group ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .benefits__group li {
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.6;
+    align-items: flex-start;
+  }
+  .benefits__group li::before { content: '✔'; color: var(--cyan); font-weight: 900; flex-shrink: 0; margin-top: 2px; }
+  .bncc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #EEF3FF;
+    border: 1px solid #c8d3e8;
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--azul);
+    margin-top: 4px;
+  }
+
+  /* ══════════════════════════════
+     ANTES × DEPOIS
+  ══════════════════════════════ */
+  .transform__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(27,58,107,.1);
+    margin-top: 32px;
+  }
+  .transform__table th {
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .transform__table th:first-child { background: #F8E8E8; color: #8B1A1A; }
+  .transform__table th:last-child  { background: #E8F4EC; color: #1A5C2E; }
+  .transform__table td {
+    padding: 18px 24px;
+    font-size: 15px;
+    line-height: 1.5;
+    vertical-align: top;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .transform__table td:first-child { background: #FFF5F5; color: #6B2020; }
+  .transform__table td:last-child  { background: #F0FAF3; color: #1A4D2E; font-weight: 700; }
+  .transform__table td:first-child::before { content: '✗ '; color: #C0392B; }
+  .transform__table td:last-child::before  { content: '✓ '; color: #27AE60; }
+
+  /* ══════════════════════════════
+     O QUE VEM NA CAIXA
+  ══════════════════════════════ */
+  .box__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media(max-width:500px){ .box__grid { grid-template-columns: 1fr; } }
+  .box__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .box__item--bonus {
+    grid-column: 1 / -1;
+    background: rgba(245,196,0,.12);
+    border-color: rgba(245,196,0,.35);
+  }
+  .box__icon { font-size: 26px; flex-shrink: 0; }
+  .box__text { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.85); }
+  .box__text strong { color: #fff; display: block; margin-bottom: 2px; }
+
+  /* ══════════════════════════════
+     CRIADORA
+  ══════════════════════════════ */
+  .creator__card {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #e2e8f4;
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: 0 4px 20px rgba(27,58,107,.08);
+    margin-top: 32px;
+  }
+  @media(max-width:560px){ .creator__card { flex-direction: column; align-items: center; text-align: center; } }
+  .creator__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--cinza-claro);
+    border: 3px dashed #c8d3e8;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    text-align: center;
+    padding: 8px;
+  }
+  .creator__name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--azul);
+    margin-bottom: 4px;
+  }
+  .creator__role {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 14px;
+  }
+  .creator__bio { font-size: 15px; line-height: 1.75; color: var(--cinza-texto); }
+
+  /* ══════════════════════════════
+     DEPOIMENTOS
+  ══════════════════════════════ */
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  @media(max-width:560px){ .testimonials__grid { grid-template-columns: 1fr; } }
+
+  /* ── IMAGE SLOT para depoimentos ── */
+  .testimonial-slot {
+    background: var(--cinza-claro);
+    border: 2px dashed #c8d3e8;
+    border-radius: var(--radius);
+    padding: 48px 20px;
+    text-align: center;
+    color: #a0aec0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 160px;
+  }
+  .testimonial-slot--video {
+    grid-column: 1 / -1;
+    min-height: 200px;
+    background: #EEF3FF;
+    border-color: var(--azul-mid);
+    color: var(--azul-mid);
+  }
+
+  /* ══════════════════════════════
+     PARA QUEM É
+  ══════════════════════════════ */
+  .audience__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .audience__list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .audience__list li .check {
+    width: 32px; height: 32px;
+    background: var(--cyan);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: var(--azul);
+    font-weight: 900;
+  }
+
+  /* ══════════════════════════════
+     OFERTA
+  ══════════════════════════════ */
+  .offer {
+    background: linear-gradient(145deg, var(--azul) 0%, #0d2550 100%);
+    padding: 80px 0;
+  }
+  .offer__card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .offer__name {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 8px;
+  }
+  .offer__de {
+    font-size: 16px;
+    color: rgba(255,255,255,.4);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .offer__price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: var(--amarelo);
+    line-height: 1;
+    margin-bottom: 4px;
+    text-shadow: 0 4px 20px rgba(245,196,0,.3);
+  }
+  .offer__price sup { font-size: 36px; vertical-align: top; margin-top: 14px; margin-right: 4px; }
+  .offer__installment {
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 28px;
+  }
+  .offer__shipping {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,194,212,.15);
+    border: 1px solid rgba(0,194,212,.3);
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 28px;
+  }
+
+  /* BÔNUS */
+  .bonus__card {
+    background: rgba(245,196,0,.1);
+    border: 1px solid rgba(245,196,0,.3);
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin: 24px auto;
+    max-width: 540px;
+    text-align: left;
+  }
+  .bonus__icon { font-size: 32px; flex-shrink: 0; }
+  .bonus__text { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.8); }
+  .bonus__text strong { color: var(--amarelo); display: block; font-size: 15px; margin-bottom: 4px; }
+
+  /* GARANTIA */
+  .guarantee__card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 14px;
+    padding: 24px 28px;
+    max-width: 540px;
+    margin: 0 auto 32px;
+    text-align: left;
+  }
+  .guarantee__icon { font-size: 44px; flex-shrink: 0; }
+  .guarantee__text h4 { font-family:'Nunito',sans-serif; font-weight:900; color:#fff; font-size:16px; margin-bottom:6px; }
+  .guarantee__text p  { font-size:13px; color:rgba(255,255,255,.65); line-height:1.6; }
+
+  /* ══════════════════════════════
+     FAQ
+  ══════════════════════════════ */
+  .faq__list { margin-top: 32px; display: flex; flex-direction: column; gap: 0; }
+  .faq__item {
+    border-bottom: 1px solid #e2e8f4;
+    padding: 24px 0;
+  }
+  .faq__item:first-child { border-top: 1px solid #e2e8f4; }
+  .faq__q {
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--azul);
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+  }
+  .faq__q::before { content: 'Q'; background: var(--azul); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
+  .faq__a { font-size: 15px; line-height: 1.75; color: var(--cinza-texto); padding-left: 34px; }
+
+  /* ══════════════════════════════
+     ENCERRAMENTO
+  ══════════════════════════════ */
+  .closing {
+    background: linear-gradient(145deg, var(--azul-mid) 0%, var(--azul) 100%);
+    padding: 80px 0;
+    text-align: center;
+    color: #fff;
+  }
+  .closing__text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.85);
+    max-width: 580px;
+    margin: 0 auto 16px;
+  }
+  .closing__punch {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--cyan);
+    margin-bottom: 36px;
+  }
+
+  /* ══════════════════════════════
+     FOOTER
+  ══════════════════════════════ */
+  .footer {
+    background: #0d1b35;
+    padding: 28px 24px;
+    text-align: center;
+    color: rgba(255,255,255,.35);
+    font-size: 13px;
+  }
+  .footer a { color: var(--cyan); text-decoration: none; }
+
+  /* ══════════════════════════════
+     SECTION HEADINGS
+  ══════════════════════════════ */
+  .section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 12px;
+  }
+  .section-title--light { color: #fff; }
+  .section-title--dark  { color: var(--azul); }
+  .section-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--cinza-texto);
+    margin-bottom: 8px;
+  }
+  .section-sub--light { color: rgba(255,255,255,.75); }
+
+  /* ── SVG placeholder ── */
+  .placeholder-icon { opacity: .25; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">Atenção, professor, pai ou mãe: seu aluno ou filho não odeia química — ele odeia aprender química do jeito errado</p>
+
+    <h1 class="hero__h1">A Tabela Periódica que seus alunos vão querer estudar — <span>sem obrigação nenhuma</span></h1>
+
+    <p class="hero__sub">
+      Química Periódica é o jogo de cartas que transforma os 118 elementos da tabela em <strong>24 desafios</strong> cheios de curiosidades, estratégia e competição.
+      Aprendizado real. Engajamento de verdade. Dentro ou fora da sala de aula.
+    </p>
+
+    <div class="hero__badges">
+      <span class="badge"><span>188</span> Cartas</span>
+      <span class="badge">Até <span>4</span> Jogadores</span>
+      <span class="badge"><span>15–30</span> min por partida</span>
+      <span class="badge">Jogo <span>2 em 1</span></span>
+    </div>
+
+    <a href="#oferta" class="btn">QUERO MEU QUÍMICA PERIÓDICA AGORA →</a>
+
+    <!-- Imagem principal do produto -->
+    <div style="margin:44px auto 0;max-width:700px;border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);">
+      <img src="hero_produto.png" alt="Química Periódica — jogo de cartas educativo" style="width:100%;display:block;border-radius:var(--radius);">
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     PROBLEMA
+════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <span class="tag tag--orange">O Problema</span>
+    <h2 class="section-title section-title--dark">Você já tentou de tudo.</h2>
+    <div class="problem__text">
+      <p>Explicou. Desenhou na lousa. Mandou o aluno ler o livro. Passou lista de exercícios. E mesmo assim, quando a pergunta chegou sobre raio atômico, eletronegatividade ou grupos da tabela…</p>
+      <span class="destaque">"Silêncio."</span>
+      <p>Ou pior: aquele olhar vazio de quem decorou na véspera e esqueceu no dia seguinte.</p>
+      <p>A verdade é que a tabela periódica, do jeito que o ensino tradicional apresenta, parece uma planilha sem alma — 118 "quadradinhos" sem contexto, sem história e sem nenhuma conexão com a vida real.</p>
+      <p>Não é culpa do aluno não se engajar. <span class="punch">É que ninguém nunca transformou esse conteúdo em algo que valesse a pena descobrir.</span></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     SOLUÇÃO
+════════════════════════════════ -->
+<section class="section section--dark">
+  <div class="container">
+    <span class="tag tag--cyan">A Virada</span>
+    <h2 class="section-title section-title--light">E se a tabela periódica virasse um jogo?</h2>
+    <p class="section-sub section-sub--light">Não um passatempo disfarçado de conteúdo. Um jogo de verdade — com mecânica, estratégia, disputa e 188 cartas que ensinam química enquanto os jogadores competem para vencer.</p>
+    <p class="section-sub section-sub--light" style="margin-top:12px;">Criado pela <strong style="color:#fff">Professora Marceli Cristina</strong>, licenciada em Química pelo IFAP e docente da rede pública do Amapá há mais de 8 anos.</p>
+
+    <!-- SLOT: foto do jogo sendo jogado -->
+    <div class="img-slot img-slot--dark" style="margin-top:40px;">
+      <svg class="placeholder-icon" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      INSERIR FOTO / GIF DO JOGO EM AÇÃO<br>
+      <small style="opacity:.6">(pessoas jogando, cartas na mesa, expressões de diversão)</small>
+    </div>
+
+    <div class="solution__grid">
+      <div class="solution__stat"><strong>188</strong><span>Cartas no total</span></div>
+      <div class="solution__stat"><strong>24</strong><span>Desafios por partida</span></div>
+      <div class="solution__stat"><strong>4</strong><span>Jogadores simultâneos</span></div>
+      <div class="solution__stat"><strong>2em1</strong><span>Modos de jogo</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     COMO FUNCIONA
+════════════════════════════════ -->
+<section class="section section--gray">
+  <div class="container">
+    <span class="tag tag--cyan" style="background:var(--azul);color:#fff;">Como Funciona</span>
+    <h2 class="section-title section-title--dark">Aprende jogando. Retém de verdade.</h2>
+
+    <p class="how__intro">A partida tem 24 desafios. Cada carta traz um elemento químico real com uma curiosidade fascinante — e os jogadores precisam usar o que aprenderam sobre propriedades, famílias e características dos elementos para descartar as cartas certas na hora certa.</p>
+
+    <p style="font-weight:800;color:var(--azul);margin-bottom:16px;">Enquanto jogam, os alunos absorvem, sem perceber:</p>
+
+    <ul class="how__list">
+      <li>Raio atômico e volume atômico</li>
+      <li>Eletronegatividade e eletropositividade</li>
+      <li>Energia de ionização</li>
+      <li>Famílias da tabela: alcalinos, halogênios, gases nobres, metais de transição, lantanídeos, actinídeos</li>
+      <li>Curiosidades históricas e aplicações reais dos elementos</li>
+    </ul>
+
+    <!-- SLOT: fotos das cartas em detalhe -->
+    <div class="img-slot">
+      <svg class="placeholder-icon" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#718096" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      INSERIR FOTOS DAS CARTAS EM CLOSE<br>
+      <small style="opacity:.6">(mostrar elementos: Polônio, Mercúrio, Amerício, Flúor etc.)</small>
+    </div>
+
+    <div class="how__punch">Você não precisa pedir para eles prestarem atenção.<br><span style="color:var(--azul-mid)">O jogo faz isso.</span></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     O QUE DIZ A CIÊNCIA
+════════════════════════════════ -->
+<section class="section section--darkmid">
+  <div class="container">
+    <span class="tag tag--white">🧠 O que diz a Ciência</span>
+    <h2 class="section-title section-title--light">Seu cérebro aprende melhor quando sente algo.</h2>
+
+    <div class="science__card">
+      <p>Pesquisas em neurociência cognitiva mostram que a memória emocional é significativamente mais duradoura do que a memória baseada em repetição mecânica. Quando uma experiência desperta <strong>curiosidade, surpresa ou competição</strong>, o cérebro libera dopamina — o neurotransmissor responsável pelo prazer e, não por coincidência, pelo processo de fixação de novas informações. Em outras palavras: <strong>o que emociona, fica.</strong></p>
+      <p>É exatamente por isso que o Química Periódica funciona onde a decoreba falha. Quando um aluno descobre que o <strong>Arsênio</strong> foi usado como veneno por herdeiros gananciosos, que o <strong>Cloro</strong> foi arma química na Primeira Guerra Mundial ou que o <strong>Amerício</strong> — aquele elemento radioativo — está no detector de fumaça do teto da sua sala, ele não está apenas lendo um dado. Ele está vivendo uma história. E histórias, ao contrário de fórmulas isoladas, <strong>o cérebro humano não esquece.</strong></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     BENEFÍCIOS
+════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <span class="tag tag--cyan" style="background:var(--azul);color:#fff;">Benefícios</span>
+    <h2 class="section-title section-title--dark">O que o jogo entrega para cada um</h2>
+
+    <div style="margin-top:32px;">
+      <div class="benefits__tabs">
+        <div class="benefits__tab-btn benefits__tab-btn--prof">👩‍🏫 Para o Professor</div>
+        <div class="benefits__tab-btn benefits__tab-btn--aluno">🎓 Para o Aluno</div>
+        <div class="benefits__tab-btn benefits__tab-btn--pais">👨‍👩‍👧 Para os Pais</div>
+      </div>
+      <div class="benefits__panel">
+        <div class="benefits__group">
+          <h4>Professor</h4>
+          <ul>
+            <li>Uma ferramenta pedagógica alinhada ao conteúdo curricular de Química</li>
+            <li>
+              <strong>Alinhado à BNCC e aos objetivos do Novo Ensino Médio</strong> — pode ser usado com segurança dentro do planejamento escolar
+              <br><span class="bncc-badge">✔ BNCC &nbsp;|&nbsp; ✔ Novo Ensino Médio</span>
+            </li>
+            <li>Aulas mais dinâmicas sem precisar reinventar o planejamento</li>
+            <li>Material que pode ser usado como introdução, revisão ou fixação do conteúdo</li>
+            <li>Acompanha um e-book com roteiro de aula pronto para uso</li>
+          </ul>
+        </div>
+        <div class="benefits__group">
+          <h4>Aluno</h4>
+          <ul>
+            <li>Aprende química sem perceber que está estudando</li>
+            <li>Desenvolve raciocínio lógico e memória de forma natural</li>
+            <li>Engaja com colegas em disputa saudável e colaborativa</li>
+            <li>Descobre histórias incríveis por trás dos elementos — como o Polônio de Marie Curie, o Mercúrio líquido e o Amerício que salva vidas nos detectores de fumaça</li>
+          </ul>
+        </div>
+        <div class="benefits__group">
+          <h4>Pais</h4>
+          <ul>
+            <li>Um presente educativo que o filho vai usar de verdade</li>
+            <li>Conteúdo sério dentro de uma embalagem que parece diversão</li>
+            <li>Produzido por uma professora da rede pública com mais de 8 anos de sala de aula</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     ANTES × DEPOIS
+════════════════════════════════ -->
+<section class="section section--gray">
+  <div class="container">
+    <span class="tag tag--orange">Transformação</span>
+    <h2 class="section-title section-title--dark">Antes × Depois do Química Periódica</h2>
+    <table class="transform__table">
+      <thead>
+        <tr>
+          <th>❌ Antes</th>
+          <th>✅ Depois</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Aluno olha para a tabela e não vê sentido</td><td>Aluno conhece a história de cada elemento</td></tr>
+        <tr><td>Professor explica, aluno não retém</td><td>Aluno aprende jogando e não esquece</td></tr>
+        <tr><td>Aula de química é obrigação</td><td>Aula de química vira expectativa</td></tr>
+        <tr><td>Tabela periódica é decoreba</td><td>Tabela periódica é estratégia</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     O QUE VEM NA CAIXA
+════════════════════════════════ -->
+<section class="section section--dark">
+  <div class="container">
+    <span class="tag tag--yellow">📦 O que vem na caixa</span>
+    <h2 class="section-title section-title--light">Tudo que você precisa para começar hoje</h2>
+
+    <!-- SLOT: foto da caixa aberta com conteúdo -->
+    <div class="img-slot img-slot--dark">
+      <svg class="placeholder-icon" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      INSERIR FOTO DA CAIXA ABERTA / CONTEÚDO EXPLODIDO<br>
+      <small style="opacity:.6">(cartas, manual, caixa, tudo visível)</small>
+    </div>
+
+    <div class="box__grid">
+      <div class="box__item">
+        <span class="box__icon">🃏</span>
+        <div class="box__text"><strong>188 Cartas</strong>com elementos reais da tabela periódica</div>
+      </div>
+      <div class="box__item">
+        <span class="box__icon">🎨</span>
+        <div class="box__text"><strong>Ilustrações originais</strong>com curiosidades científicas em cada carta</div>
+      </div>
+      <div class="box__item">
+        <span class="box__icon">📖</span>
+        <div class="box__text"><strong>Manual de instruções</strong>completo e didático</div>
+      </div>
+      <div class="box__item">
+        <span class="box__icon">🎮</span>
+        <div class="box__text"><strong>Mecânica 2 em 1</strong>dois modos de jogo na mesma caixa</div>
+      </div>
+      <div class="box__item box__item--bonus">
+        <span class="box__icon">🎁</span>
+        <div class="box__text"><strong>BÔNUS: E-book com Roteiro de Aula</strong>Guia pedagógico para professores aplicarem o jogo em sala com objetivos de aprendizagem definidos — incluso sem custo adicional.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     CRIADORA
+════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <span class="tag tag--cyan" style="background:var(--azul);color:#fff;">Quem criou este jogo</span>
+    <h2 class="section-title section-title--dark">Professora Marceli Cristina Maia dos Santos</h2>
+
+    <div class="creator__card">
+      <!-- SLOT: foto da professora -->
+      <div class="creator__photo">FOTO DA<br>PROFESSORA</div>
+      <div>
+        <div class="creator__name">Professora Marceli Cristina</div>
+        <div class="creator__role">Licenciada em Química · IFAP · Docente desde 2016</div>
+        <p class="creator__bio">Especialista no ensino de Biologia e Química, docente da rede pública do estado do Amapá há mais de 8 anos. Criadora do <strong>Química Periódica</strong>, do <strong>Memória Orgânica</strong> e autora do livro <em>Eletroquímica em Realidade Aumentada</em>, desenvolvido pela startup <strong>Ludbel Educar</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     DEPOIMENTOS
+════════════════════════════════ -->
+<section class="section section--gray">
+  <div class="container">
+    <span class="tag tag--orange">O que dizem quem já jogou</span>
+    <h2 class="section-title section-title--dark">Resultados reais de professores e alunos</h2>
+
+    <div class="testimonials__grid">
+      <!-- SLOT: print de depoimento 1 -->
+      <div class="testimonial-slot">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#c8d3e8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        INSERIR PRINT DE DEPOIMENTO 1<br><small>(print de WhatsApp, Instagram ou Google)</small>
+      </div>
+      <!-- SLOT: print de depoimento 2 -->
+      <div class="testimonial-slot">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#c8d3e8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        INSERIR PRINT DE DEPOIMENTO 2<br><small>(print de WhatsApp, Instagram ou Google)</small>
+      </div>
+      <!-- SLOT: print de depoimento 3 -->
+      <div class="testimonial-slot">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#c8d3e8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        INSERIR PRINT DE DEPOIMENTO 3
+      </div>
+      <!-- SLOT: print de depoimento 4 -->
+      <div class="testimonial-slot">
+        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#c8d3e8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        INSERIR PRINT DE DEPOIMENTO 4
+      </div>
+      <!-- SLOT: vídeo depoimento -->
+      <div class="testimonial-slot testimonial-slot--video">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#2A5298" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+        INSERIR VÍDEO DE DEPOIMENTO<br><small>(embed YouTube / Vimeo ou link direto)</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     PARA QUEM É
+════════════════════════════════ -->
+<section class="section section--dark">
+  <div class="container">
+    <span class="tag tag--cyan">Para quem é</span>
+    <h2 class="section-title section-title--light">O Química Periódica é para você se…</h2>
+    <ul class="audience__list">
+      <li><span class="check">✓</span>Você é professor(a) de Química do Ensino Médio e quer mais engajamento em sala</li>
+      <li><span class="check">✓</span>Você é de uma escola ou instituto que busca materiais didáticos diferenciados</li>
+      <li><span class="check">✓</span>Você é aluno de Ensino Médio ou cursinho preparatório</li>
+      <li><span class="check">✓</span>Você é pai ou mãe que quer incentivar o aprendizado de ciências em casa</li>
+      <li><span class="check">✓</span>Você ama química e quer uma experiência diferente com a tabela periódica</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     OFERTA
+════════════════════════════════ -->
+<section class="offer" id="oferta">
+  <div class="container" style="text-align:center;">
+    <span class="tag tag--yellow">💰 Oferta</span>
+    <h2 class="section-title section-title--light" style="margin-bottom:40px;">Garanta o seu agora</h2>
+
+    <div class="offer__card">
+      <p class="offer__name">Química Periódica — Jogo de Cartas Educativo</p>
+      <p class="offer__de">De R$ 197,00</p>
+      <div class="offer__price"><sup>R$</sup>89<small style="font-size:40px">,90</small></div>
+      <p class="offer__installment">ou em até 2x sem juros</p>
+      <div class="offer__shipping">🚚 Frete grátis — Região Norte do Brasil</div>
+      <a href="#" class="btn btn--full" style="font-size:20px;padding:22px 40px;">QUERO MEU QUÍMICA PERIÓDICA →</a>
+    </div>
+
+    <div class="bonus__card">
+      <span class="bonus__icon">🎁</span>
+      <div class="bonus__text">
+        <strong>BÔNUS INCLUSO: E-book Roteiro de Aula</strong>
+        Guia pedagógico para professores aplicarem o jogo em sala com objetivos de aprendizagem definidos. Incluso sem custo adicional.
+      </div>
+    </div>
+
+    <div class="guarantee__card">
+      <span class="guarantee__icon">🛡️</span>
+      <div class="guarantee__text">
+        <h4>Satisfação garantida</h4>
+        <p>Se por qualquer motivo você não ficar satisfeito, basta entrar em contato. Sua compra está protegida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     FAQ
+════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <span class="tag tag--cyan" style="background:var(--azul);color:#fff;">Dúvidas Frequentes</span>
+    <h2 class="section-title section-title--dark">Perguntas Frequentes</h2>
+
+    <div class="faq__list">
+      <div class="faq__item">
+        <p class="faq__q">Para qual faixa etária é indicado?</p>
+        <p class="faq__a">O jogo é indicado principalmente para alunos do Ensino Médio (15+), mas pode ser usado em cursinhos e por qualquer pessoa com curiosidade sobre química.</p>
+      </div>
+      <div class="faq__item">
+        <p class="faq__q">Quantas pessoas podem jogar ao mesmo tempo?</p>
+        <p class="faq__a">Até 4 jogadores por partida. Ideal para grupos em sala de aula.</p>
+      </div>
+      <div class="faq__item">
+        <p class="faq__q">Quanto tempo dura uma partida?</p>
+        <p class="faq__a">Entre 15 e 30 minutos, tornando-o ideal para uso em aulas regulares.</p>
+      </div>
+      <div class="faq__item">
+        <p class="faq__q">O jogo é alinhado ao currículo escolar?</p>
+        <p class="faq__a">Sim. O conteúdo cobre propriedades periódicas, famílias de elementos e classificações presentes no currículo de Química do Ensino Médio, alinhado à BNCC e ao Novo Ensino Médio.</p>
+      </div>
+      <div class="faq__item">
+        <p class="faq__q">Posso comprar em quantidade para minha escola?</p>
+        <p class="faq__a">Sim! Entre em contato para condições especiais para compras institucionais.</p>
+      </div>
+      <div class="faq__item">
+        <p class="faq__q">O frete é grátis?</p>
+        <p class="faq__a">Frete grátis para toda a Região Norte do Brasil. Para outras regiões, o frete será calculado no checkout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     ENCERRAMENTO
+════════════════════════════════ -->
+<section class="closing">
+  <div class="container">
+    <span class="tag tag--white">Última chance</span>
+    <h2 class="section-title section-title--light" style="margin-bottom:24px;">A escolha já foi fácil para quem já tem o jogo.</h2>
+    <p class="closing__text">Você pode continuar tentando fazer a tabela periódica fazer sentido com os métodos de sempre.</p>
+    <p class="closing__text">Ou pode colocar um jogo na mesa e deixar seus alunos aprenderem enquanto competem, riem e descobrem que a química está em tudo — no detector de fumaça do teto, na água que bebem, no celular que usam.</p>
+    <p class="closing__punch">A escolha já foi fácil para os professores que já têm o jogo.</p>
+    <a href="#oferta" class="btn btn--orange" style="font-size:20px;padding:22px 48px;">COMPRAR QUÍMICA PERIÓDICA — R$ 89,90 →</a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer class="footer">
+  <p>© 2025 <a href="https://www.ludbeleducar.com.br/" target="_blank">Ludbel Educar</a> — Materiais didáticos que transformam o jeito de aprender.</p>
+  <p style="margin-top:6px;"><a href="https://www.instagram.com/ludbeleducar/" target="_blank">@ludbeleducar</a></p>
+</footer>
+
+</body>
+</html>
